@@ -18,8 +18,9 @@ public final class PersonJSO extends JavaScriptObject
 
 	private static int counter;
 
-	static List<String> contacts = new ArrayList<String>();
+	private static List<String> contacts = new ArrayList<String>();
 
+	private static List<String> skills = new ArrayList<String>();
 
 	private static void addContact( String contact )
 	{
@@ -27,10 +28,10 @@ public final class PersonJSO extends JavaScriptObject
 		contacts.add( contact );
 	}
 
-	public native void addSkill(PersonJSO person, String skill ) /*-{
+	public native void addSkill( PersonJSO person, String skill ) /*-{
 	}-*/;
 
-	public native void addContact(String contact, String name ) /*-{
+	public native void addContact( String contact, String name ) /*-{
 		// Call static method addContact()
 		@com.appbootup.explore.gwt.client.PersonJSO::addContact(Ljava/lang/String;)(contact);
 
@@ -63,5 +64,18 @@ public final class PersonJSO extends JavaScriptObject
 	public final native void setAge( int age )
 	/*-{
 		this.age = age;
+	}-*/;
+
+	public final native int getSkills()
+	/*-{
+		if (this.skills == null) {
+			this.skills = [];
+		}
+		return this.skills;
+	}-*/;
+
+	public final native void setSkills( List<String> skills )
+	/*-{
+		this.skills = skills;
 	}-*/;
 }
